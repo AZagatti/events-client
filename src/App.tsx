@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, ChakraProvider, Grid, theme } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ColorModeSwitcher } from "./ColorSwitch";
+import { Home } from "./layouts/Home";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const queryClient = new QueryClient();
 
-export default App;
+export const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <ChakraProvider theme={theme}>
+      <Box textAlign="center" fontSize="xl">
+        <Grid minH="100vh" p={3}>
+          <ColorModeSwitcher justifySelf="flex-end" />
+          <Home />
+        </Grid>
+      </Box>
+    </ChakraProvider>
+  </QueryClientProvider>
+);
